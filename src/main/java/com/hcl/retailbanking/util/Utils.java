@@ -1,5 +1,6 @@
 package com.hcl.retailbanking.util;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
@@ -24,8 +25,8 @@ public class Utils {
      *
      * @return
      */
-    public static Date getCurrentDate() {
-        return new Date();
+    public static LocalDate getCurrentDate() {
+        return LocalDate.now();
     }
 
     /**

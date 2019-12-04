@@ -56,12 +56,26 @@ public class ApiExceptionHandler {
      * @param ex
      * @return
      */
-    @ExceptionHandler(ProductNotFoundException.class)
+    @ExceptionHandler(AccountNotFoundException.class)
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public ApiExceptionDto handleProductNotFoundException(ProductNotFoundException ex) {
+    public ApiExceptionDto handleAccountNotFoundException(AccountNotFoundException ex) {
         String msg = ex.getMessage();
         return new ApiExceptionDto(ApiConstant.VALIDATION_FAILED, msg);
+    }
+
+    /**
+     * handleAllRuntimeExceptions()
+     *
+     * @param ex
+     * @return
+     */
+    @ExceptionHandler(RuntimeException.class)
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public final ApiExceptionDto handleAllRuntimeExceptions(RuntimeException ex) {
+        String defaultMessage = ex.getMessage();
+        return new ApiExceptionDto(ApiConstant.INTERNAL_SERVER_ERROR, defaultMessage);
     }
 
     /**
@@ -70,12 +84,11 @@ public class ApiExceptionHandler {
      * @param ex
      * @return
      */
-    @ExceptionHandler(RuntimeException.class)
+    @ExceptionHandler(Exception.class)
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public final ApiExceptionDto handleAllExceptions(RuntimeException ex) {
+    public final ApiExceptionDto handleAllExceptions(Exception ex) {
         String defaultMessage = ex.getMessage();
         return new ApiExceptionDto(ApiConstant.INTERNAL_SERVER_ERROR, defaultMessage);
     }
-
 }

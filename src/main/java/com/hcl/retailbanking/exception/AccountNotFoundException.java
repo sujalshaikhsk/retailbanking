@@ -3,9 +3,9 @@ package com.hcl.retailbanking.exception;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ProductNotFoundException extends RuntimeException{
+public class AccountNotFoundException extends RuntimeException{
 	
-    Logger logger = LoggerFactory.getLogger(ProductNotFoundException.class);
+    Logger logger = LoggerFactory.getLogger(AccountNotFoundException.class);
 
 	/**
 	 * 
@@ -16,13 +16,13 @@ public class ProductNotFoundException extends RuntimeException{
 	public void printStackTrace() {
 		// TODO Auto-generated method stub
 		super.printStackTrace();
-		logger.error("The Prodcut is not Found");
+		logger.error("The Account is not Found");
 	}
 	
 	@Override
 	public String getMessage() {
 		// TODO Auto-generated method stub
-		return "The Prodcut is not Found";
+		return "The Account is not Found";
 	}
 
 }
