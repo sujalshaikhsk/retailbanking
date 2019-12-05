@@ -17,6 +17,8 @@ import java.util.List;
 @Repository
 public interface TransactionRepository extends JpaRepository<Transaction, Integer> {
 
-    @Query("select t from Transaction t where t.fromAccount =:accountNumber or t.toAccount =:accountNumber order by t.transactionDate desc")
+    List<Transaction> findTop5ByFromAccountOrderByTransactionDateDesc(Long accountNumber);
+
+    @Query("select t from Transaction t where t.fromAccount =:accountNumber order by t.transactionDate desc")
     List<Transaction> getLastFiveTransactions(@Param("accountNumber") Long accountNumber);
 }

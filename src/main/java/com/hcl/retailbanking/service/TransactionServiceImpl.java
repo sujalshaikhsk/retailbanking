@@ -120,7 +120,7 @@ public class TransactionServiceImpl implements TransactionService {
 		if(account!=null) {
 			System.out.println("xxxx "+account.getBalance());
 			accountSummaryDto.setAccount(account);
-			List<Transaction> transactionList = transactionRepository.getLastFiveTransactions(account.getAccountNumber());
+			List<Transaction> transactionList = transactionRepository.findTop5ByFromAccountOrderByTransactionDateDesc(account.getAccountNumber());
 			if(transactionList!=null && !transactionList.isEmpty()) {
 				accountSummaryDto.setMessage(ApiConstant.SUCCESS);
 				accountSummaryDto.setTransactions(transactionList);

@@ -85,7 +85,7 @@ public class TransactionControllerTest {
     public void testGetStoresForPositive() throws Exception {
         Integer userId=123456;
         MvcResult mvcResult = mockMvc.perform(
-                MockMvcRequestBuilders.get("/stores")
+                MockMvcRequestBuilders.get("/transactions")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
@@ -104,14 +104,12 @@ public class TransactionControllerTest {
 
         Integer userId=123456;
         MvcResult mvcResult = mockMvc.perform(
-                MockMvcRequestBuilders.get("/stores")
+                MockMvcRequestBuilders.get("/transactions")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
         Mockito.when(transactionService.accountSummary(userId)).thenReturn(accountSummaryDto);
-
         //Mockito.verify(transactionService).accountSummary(userId);
-
         assertNull(transactionService.accountSummary(userId));
     }
 }
