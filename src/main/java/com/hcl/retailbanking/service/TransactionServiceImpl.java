@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Optional;
 
 import com.hcl.retailbanking.dto.AccountSummaryDto;
+import com.hcl.retailbanking.exception.AccountNotFoundException;
+import com.hcl.retailbanking.util.ApiConstant;
+import com.hcl.retailbanking.util.StringConstant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -112,13 +115,22 @@ public class TransactionServiceImpl implements TransactionService {
 	public AccountSummaryDto accountSummary(Integer userId){
 		AccountSummaryDto accountSummaryDto=new AccountSummaryDto();
 		Account account=accountRepository.findByUserId(userId);
+		System.out.println("xxxx "+userId);
+
 		if(account!=null) {
+			System.out.println("xxxx "+account.getBalance());
 			accountSummaryDto.setAccount(account);
 			List<Transaction> transactionList = transactionRepository.getLastFiveTransactions(account.getAccountNumber());
-			if(transactionList!=null && !transactionList.isEmpty())
+			if(transactionList!=null && !transactionList.isEmpty()) {
+				accountSummaryDto.setMessage(ApiConstant.SUCCESS);
 				accountSummaryDto.setTransactions(transactionList);
-			else
+			}else {
+				accountSummaryDto.setMessage(ApiConstant.EMPTY);
 				accountSummaryDto.setTransactions(Collections.emptyList());
+			}
+		}else{
+			//throw new AccountNotFoundException();
+			accountSummaryDto.setMessage(ApiConstant.EMPTY);
 		}
 		return accountSummaryDto;
 	}

@@ -4,7 +4,8 @@ public class ApiConstant {
     private ApiConstant(){}
 
     public static final String SUCCESS = "SUCCESSFUL";
-    public static final String FAILED = "FAILED";
+    public static final String FAILED = "Invalid account number";
+    public static final String EMPTY = "No transaction available";
 
     public static final String CREATE_SUCCESS = "CREATION SUCCESSFUL";
     public static final String CREATE_FAILED = "CREATION FAILED";
